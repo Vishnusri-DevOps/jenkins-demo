@@ -5,7 +5,17 @@ pipeline {
         IMAGE = "vishnusrig/jenkins-demo"
     }
 
+    options {
+        skipDefaultCheckout()
+    }
+
     stages {
+        stage('Clean Workspace') {
+            steps {
+                deleteDir() // <-- This clears everything from the workspace
+            }
+        }
+
         stage('Checkout') {
             steps {
                 git 'https://github.com/Vishnusri-DevOps/jenkins-demo.git'
