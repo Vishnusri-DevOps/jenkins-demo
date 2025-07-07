@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-	 IMAGE = "yourdockerhubusername/jenkins-demo"
+        IMAGE = "vishnusrig/jenkins-demo"
     }
 
     stages {
@@ -20,10 +20,10 @@ pipeline {
 
         stage('Push to DockerHub') {
             steps {
-               withCredentials([usernamePassword(credentialsId: 'dockerhub-creds', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
-    			sh 'echo $PASS | docker login -u $USER --password-stdin'
-   			sh 'docker push $IMAGE'
-
+                withCredentials([usernamePassword(credentialsId: 'dockerhub-creds', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
+                    sh 'echo $PASS | docker login -u $USER --password-stdin'
+                    sh 'docker push $IMAGE'
+                }
             }
         }
 
